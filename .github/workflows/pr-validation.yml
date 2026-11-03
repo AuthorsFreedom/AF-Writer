@@ -25,7 +25,7 @@ jobs:
       - name: Install Linux System Dependencies for Tauri
         run: |
           sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev cmake pkg-config
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -73,3 +73,11 @@ jobs:
 
       - name: Run Rust Unit Tests
         run: cargo test --manifest-path src-tauri/Cargo.toml
+
+      - name: Verify Specta Bindings are Up-to-Date
+        run: |
+          if [ -n "$(git status --porcelain src/core/ipc/bindings.ts)" ]; then
+            echo "::error::IPC bindings are out of date! Run tests or app locally to regenerate src/core/ipc/bindings.ts and commit the changes."
+            git diff src/core/ipc/bindings.ts
+            exit 1
+          fi
