@@ -1,0 +1,19 @@
+name: Branch Gatekeeper
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-source-branch:
+    name: Verify PR Source is develop
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Source Branch
+        run: |
+          echo "Target Branch: ${{ github.base_ref }}"
+          echo "Source Branch: ${{ github.head_ref }}"
+          if [ "${{ github.head_ref }}" != "develop" ]; then
+            echo "::error::Policy Violation: Direct PRs to 'main' must originate strictly from 'develop'. Current source: ${{ github.head_ref }}"
+            exit 1
+          fi
