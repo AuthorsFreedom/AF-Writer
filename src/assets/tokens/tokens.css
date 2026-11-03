@@ -1,0 +1,23 @@
+:root {
+    --surface-base: #1e1b18;
+    --surface-raised: #2a2622;
+    --surface-panel: #24201c;
+    --border-subtle: #3d3730;
+    --text-primary: #e8e3d9;
+    --text-muted: #9e9589;
+    --accent-brand: #d4a373;
+    --gutter-waveform: #8cb7fa;
+    --animation-duration: 150ms;
+}
+
+:root[data-theme="e-ink"] {
+    --surface-base: #ffffff;
+    --surface-raised: #ffffff;
+    --surface-panel: #ffffff;
+    --border-subtle: #000000;
+    --text-primary: #000000;
+    --text-muted: #333333;
+    --accent-brand: #000000;
+    --gutter-waveform: #000000;
+    --animation-duration: 0ms !important;
+}

@@ -1,0 +1,48 @@
+[package]
+name = "af-writer"
+version = "0.1.0"
+description = "Native engine for narrative design, continuity, and book studio"
+edition = "2024" # If you get an 'invalid edition' error, change this to "2021"
+
+[lib]
+# The `_lib` suffix is required so the lib name doesn't collide with the binary
+name = "af_writer_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# Tauri v2 core & official plugins
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-fs = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-shell = "2"
+tauri-plugin-opener = "2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9"
+specta-typescript = "=2.0.0-rc.20"
+
+# Type-safe IPC generation between Rust and React
+specta = { version = "=2.0.0-rc.20", features = ["derive"] }
+specta-typescript = "0.0.7"
+tauri-specta = { version = "=2.0.0-rc.20", features = ["derive", "typescript"] }
+
+# Vault File I/O & Concurrency
+tempfile = "3.12"
+notify = "6.1"
+tokio = { version = "1", features = ["full"] }
+
+# SQLite & Markdown AST Parsing
+rusqlite = { version = "0.32", features = ["bundled", "bundled-full"] }
+tree-sitter = "0.22"
+tree-sitter-md = "0.3"
+
+# Release optimizations for a compact, fast desktop binary
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true
