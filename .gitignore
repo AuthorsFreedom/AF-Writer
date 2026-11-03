@@ -45,3 +45,20 @@ analytics.db
 .DS_Store
 Thumbs.db
 *.swp
+
+# Signing & Environment Keys
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+tauri.updater.key
+
+# Test Vaults & Personal Writing
+test-vaults/
+sample-vaults/
+*.storyvault
+*.manuscript
+world/
+books/
