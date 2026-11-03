@@ -3,6 +3,11 @@ name: PR Validation
 on:
   pull_request:
     branches: [develop]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - ".gitignore"
+      - "LICENSE"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

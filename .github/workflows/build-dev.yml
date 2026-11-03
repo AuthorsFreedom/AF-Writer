@@ -3,6 +3,11 @@ name: Dev Build
 on:
   push:
     branches: [develop]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
+      - ".gitignore"
+      - "LICENSE"
 
 jobs:
   build-dev:
